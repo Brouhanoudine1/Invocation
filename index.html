@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta
+      name="description"
+      content="Adhkār — invocations du matin et du soir, hors ligne, en français et en arabe."
+    />
+    <meta name="theme-color" content="#0d6e62" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Adhkār" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <title>Adhkār — Invocations du matin et du soir</title>
+    <script>
+      (function () {
+        try {
+          var theme = localStorage.getItem('adhkar-theme')
+          if (theme !== 'clair' && theme !== 'sombre') {
+            theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair'
+          }
+          document.documentElement.setAttribute('data-theme', theme)
+        } catch (e) {}
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
