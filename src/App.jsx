@@ -3,6 +3,7 @@ import invocations from './data/invocations.json'
 import { useFavorites } from './hooks/useFavorites'
 import { useHorsLigne } from './hooks/useHorsLigne'
 import FilterBar from './components/FilterBar'
+import Footer from './components/Footer'
 import Header from './components/Header'
 import InvocationCard from './components/InvocationCard'
 import Toast from './components/Toast'
@@ -129,19 +130,20 @@ function App() {
         horsLigne={horsLigne}
       />
 
-      <FilterBar
-        filtreMoment={filtreMoment}
-        onChangerMoment={changerMoment}
-        favorisUniquement={favorisUniquement}
-        onBasculerFavoris={() => {
-          setFavorisUniquement((actuel) => !actuel)
-          remonterEnHaut()
-        }}
-        nombreVisible={invocationsFiltrees.length}
-        nombreFavoris={favoris.length}
-      />
+      <div className="app__corps">
+        <FilterBar
+          filtreMoment={filtreMoment}
+          onChangerMoment={changerMoment}
+          favorisUniquement={favorisUniquement}
+          onBasculerFavoris={() => {
+            setFavorisUniquement((actuel) => !actuel)
+            remonterEnHaut()
+          }}
+          nombreVisible={invocationsFiltrees.length}
+          nombreFavoris={favoris.length}
+        />
 
-      <main id="contenu" className="contenu">
+        <main id="contenu" className="contenu">
         {invocationsFiltrees.length === 0 ? (
           <p className="etat-vide">
             {favorisUniquement
@@ -172,7 +174,10 @@ function App() {
             ))}
           </div>
         )}
-      </main>
+        </main>
+      </div>
+
+      <Footer />
 
       <Toast
         message={toast.message}

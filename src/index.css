@@ -20,7 +20,7 @@
   --shadow: 0 10px 30px rgba(40, 32, 18, 0.08);
   --ring: 0 0 0 3px color-mix(in srgb, var(--or) 45%, transparent);
   --radius: 18px;
-  --header-h: 72px;
+  --header-h: 80px;
   --nav-h: 0px;
   --ease: 240ms ease;
 }
@@ -101,9 +101,17 @@ svg {
 }
 
 .app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+.app__corps {
+  flex: 1 0 auto;
+  width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 1rem calc(1.5rem + var(--nav-h));
+  padding: 0 1rem 1.5rem;
 }
 
 /* ---------- En-tête ---------- */
@@ -112,45 +120,77 @@ svg {
   position: sticky;
   top: 0;
   z-index: 10;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--or) 8%, var(--bg)) 0%,
+      color-mix(in srgb, var(--bg) 92%, transparent) 100%
+    );
+  backdrop-filter: blur(18px) saturate(1.15);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--or) 32%, transparent);
+}
+
+.entete__cadre {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
+  gap: 0.8rem;
+  max-width: 1280px;
   min-height: var(--header-h);
-  padding: 0.7rem 0;
-  background: color-mix(in srgb, var(--bg) 94%, transparent);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
 }
 
 .entete__marque {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
+  gap: 0.75rem;
   min-width: 0;
 }
 
 .entete__icone {
   flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(
+    165deg,
+    var(--or-soft),
+    color-mix(in srgb, var(--accent-soft) 50%, var(--or-soft))
+  );
   color: var(--or);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--or) 30%, transparent);
+}
+
+.entete__textes {
+  min-width: 0;
 }
 
 .entete__titre {
   margin: 0;
-  font-size: clamp(1.15rem, 2vw, 1.45rem);
-  letter-spacing: 0.02em;
+  font-size: clamp(1.22rem, 2.1vw, 1.55rem);
+  font-weight: 700;
+  letter-spacing: 0.03em;
   line-height: 1.15;
 }
 
 .entete__sous-titre {
-  margin: 0.1rem 0 0;
+  margin: 0.18rem 0 0;
   color: var(--text-muted);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .entete__actions {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
   gap: 0.5rem;
 }
 
@@ -575,6 +615,56 @@ svg {
   opacity: 1;
 }
 
+/* ---------- Pied de page ---------- */
+
+.pied {
+  flex-shrink: 0;
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg-elev) 78%, transparent);
+}
+
+.pied__cadre {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1.4rem 1rem calc(1.5rem + var(--nav-h));
+  text-align: center;
+}
+
+.pied__ornement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-bottom: 0.7rem;
+  color: var(--or);
+}
+
+.pied__ornement span {
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--or));
+}
+
+.pied__ornement span:last-child {
+  background: linear-gradient(90deg, var(--or), transparent);
+}
+
+.pied__marque {
+  margin: 0;
+  color: var(--or);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.pied__droits {
+  margin: 0.28rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
 /* ---------- Animations ---------- */
 
 @keyframes fade-slide-up {
@@ -621,16 +711,28 @@ svg {
     --nav-h: 76px;
   }
 
-  .entete {
-    flex-wrap: wrap;
+  .entete__cadre {
+    padding: 0.65rem 1rem;
+  }
+
+  .entete__icone {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
   }
 
   .entete__sous-titre {
-    display: none;
+    max-width: 38vw;
   }
 
   .segmented__btn {
-    padding: 0 0.55rem;
+    padding: 0 0.5rem;
+    min-width: 40px;
+  }
+
+  .badge-hors-ligne {
+    padding: 0.22rem 0.5rem;
+    font-size: 0.68rem;
   }
 
   .filtres {
@@ -656,8 +758,14 @@ svg {
 }
 
 @media (min-width: 720px) {
-  .app {
+  .app__corps {
     padding: 0 1.4rem 2.5rem;
+  }
+
+  .entete__cadre,
+  .pied__cadre {
+    padding-left: 1.4rem;
+    padding-right: 1.4rem;
   }
 
   .grille {
