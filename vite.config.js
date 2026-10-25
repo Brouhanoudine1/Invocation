@@ -2,8 +2,10 @@ import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
-// base: './' rend le build portable (Netlify, GitHub Pages, ouverture locale de dist).
+const base = process.env.GITHUB_ACTIONS ? '/Invocation/' : './'
+
 export default defineConfig({
+  base,
   plugins: [
     react(),
     VitePWA({
@@ -51,5 +53,4 @@ export default defineConfig({
       },
     }),
   ],
-  base: './',
 })

@@ -20,7 +20,9 @@ npm run build
 Le dossier `dist/` contient le site prêt à publier :
 
 - **Netlify** : glisser-déposer `dist`, ou relier le dépôt avec la commande de build `npm run build` et le dossier de publication `dist`.
-- **GitHub Pages** : publier le contenu de `dist`. Le `base: './'` de Vite permet un déploiement dans un sous-dossier.
+- **GitHub Pages** : un workflow GitHub Actions construit `dist` à chaque push sur `main`.
+  Dans le dépôt : **Settings → Pages → Source → GitHub Actions**.
+  L’URL du site : `https://brouhanoudine1.github.io/Invocation/`
 
 Prévisualiser le build localement :
 
